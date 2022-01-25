@@ -424,6 +424,8 @@
 
         $('.ddj').find('h1').text('道德经: ' + current_page);
 
+        $('connection').remove();
+
         jQuery('.ddj').connections({ to: '.markov' });
         jQuery('.int').connections({ to: '.markov' });
     };
