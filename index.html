@@ -388,13 +388,12 @@
 </script>
 
 <script>
-    var data = [];
-    for (let i=0; i<81; i++) {
-        data[i] = {'ddj':[0,1], 'markov':[0,1], 'int':[0,1]};
-        }
-</script>
 
-<script>
+    var json_data = {};
+    $.getJSON("data.json", function(data) {
+            json_data = data;
+            update_text();
+        }); 
 
     jQuery(document).ready(function() {
 
@@ -414,22 +413,6 @@
             update_text();
         });
 
-        for (const doc of docs) {
-                for (const t of texts) {
-                        console.log(doc + ' ' + t);
-                        $.get(doc + '-'+ t + '.txt', function(data) {
-                            console.log('got data for ' + doc + t);
-                            doc_data = data.replace('/\n\n/g', 'AAAAA');
-                            doc_data = doc_data.replace('/\n/g', '');
-                            doc_data = doc_data.split('AAAAA');
-                            for (let i=0; i<81; i++) {
-                                data[i][doc][0] = doc_data[i];
-                                }
-                    }, 'text');
-                } 
-            }
-
-        update_text();
     });
 
     var current_page = 1;
@@ -438,8 +421,8 @@
 
     function update_text() {
         for (const doc of docs) {
-            $('.' + doc).find('.chr').text(data[current_page-1][doc][0]);
-            $('.' + doc).find('.eng').text(data[current_page-1][doc][1]);
+            $('.' + doc).find('.chr').text(json_data[doc+'chr'][current_page-1]);
+            $('.' + doc).find('.eng').text(json_data[doc+'eng'][current_page-1]);
         }
         $('.counter').text(current_page);
     };
