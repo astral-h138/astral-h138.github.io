@@ -7,7 +7,6 @@
 
 <meta charset="utf-8"/>
 <body>
-    <p class="counter"></p>
     <div class="main">
         <div class="content ddj">
             <h1>道德经</h1>
@@ -48,6 +47,7 @@
         min-width: 15%;
         min-height: 20%;
         background: rgb(245, 245, 245);
+        max-width: 20%;
         padding: 10px;
     }
     .ddj {
@@ -66,7 +66,7 @@
         display: flex;
     }
     .c-left {
-        width: 50%;
+        min-width: 30%;
     }
     .c-right {
         flex-grow: 1;
@@ -397,9 +397,6 @@
 
     jQuery(document).ready(function() {
 
-        jQuery('.ddj').connections({ to: '.markov' });
-        jQuery('.int').connections({ to: '.markov' });
-
         $('.fwd').click(function() {
             current_page = (current_page + 1) % 81;
             update_text();
@@ -424,7 +421,11 @@
             $('.' + doc).find('.chr').text(json_data[doc+'chr'][current_page-1]);
             $('.' + doc).find('.eng').text(json_data[doc+'eng'][current_page-1]);
         }
-        $('.counter').text(current_page);
+
+        $('.ddj').find('h1').text('道德经: ' + current_page);
+
+        jQuery('.ddj').connections({ to: '.markov' });
+        jQuery('.int').connections({ to: '.markov' });
     };
 
 
