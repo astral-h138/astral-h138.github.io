@@ -388,17 +388,15 @@
 </script>
 
 <script>
-    var data = [
-            {'ddj': ['ddj (chinese)', 'ddj (english)'],
-             'markov': ['markov (zh)', 'markov (eng)'],
-             'int': ['inward training (zh)', 'int (eng)']
-            }];
+    var data = [];
+    for (let i=0; i<81; i++) {
+        data[i] = {'ddj':[0,1], 'markov':[0,1], 'int':[0,1]};
+        }
+</script>
+
+<script>
 
     jQuery(document).ready(function() {
-        data = [];
-        for (let i=0; i<81; i++) {
-            data[i] = {'ddj':[], 'markov':[], 'int':[]};
-            }
 
         jQuery('.ddj').connections({ to: '.markov' });
         jQuery('.int').connections({ to: '.markov' });
