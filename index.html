@@ -418,7 +418,9 @@
 
         for (const doc of docs) {
                 for (const t of texts) {
+                        console.log(doc + ' ' + t);
                         $.get(doc + '-'+ t + '.txt', function(data) {
+                            console.log('got data for ' + doc + t);
                             doc_data = data.replace('/\n\n/g', 'AAAAA');
                             doc_data = doc_data.replace('/\n/g', '');
                             doc_data = doc_data.split('AAAAA');
